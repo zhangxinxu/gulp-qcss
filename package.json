@@ -1,0 +1,39 @@
+{
+  "name": "gulp-qcss",
+  "version": "0.0.1",
+  "description": "A gulp plugin for writing css quickly as rocket!.",
+  "keywords": [
+    "gulpplugin",
+    "qcss",
+    "css",
+    "efficiency"
+  ],
+  "homepage": "https://github.com/zhangxinxu/gulp-qcss",
+  "bugs": {
+    "url": "https://github.com/zhangxinxu/gulp-qcss/issues"
+  },
+  "author": {
+    "name": "zhangxinxu",
+    "url": "https://github.com/zhangxinxu"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zhangxinxu/gulp-qcss.git"
+  },
+  "dependencies": {
+    "gulp-util": "^2.2.14",
+    "through2": "^0.4.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=0.9"
+  },
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "zhangxinxu",
+      "email": "zhangxinxu@zhangxinxu.com"
+    }
+  ]
+}

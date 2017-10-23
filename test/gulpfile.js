@@ -1,17 +1,13 @@
-# gulp-qcss
-write css quickly as rocket!
+/**
+ * test file by zhangxinxu
+ */
 
-## Use example
-
-<pre>
 var gulp = require('gulp');
 
-var qcss = require('gulp-qcss');
+var qcss = require('../index');
 
 gulp.task('default', function () {
     gulp.src('src/test.qcss')
         .pipe(qcss())
         .pipe(gulp.dest('dist/'));
 });
-</pre>
-
