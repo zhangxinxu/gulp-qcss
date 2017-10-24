@@ -42,12 +42,13 @@ function qCss(extension) {
     bgp: 'background-position: ',
     c: 'color: ',
     bd: 'border: ',
-    o: 'outline: ',
     bdl: 'border-left: ',
     bdr: 'border-right: ',
     bdt: 'border-top: ',
     bdb: 'border-bottom: ',
     br: 'border-radius: ',
+    bbb: 'box-sizing: border-box',
+    o: 'outline: ',
     f: 'font-size: ',
     ff: 'font-family: ',
     fs: 'font-style: ',
@@ -86,13 +87,13 @@ function qCss(extension) {
     nowrap: 'white-space: nowrap',
     bk: 'word-break: break-all',
     bkw: 'word-wrap: break-word',
-    wb: 'word-break: ',
-    ww: 'word-wrap: ',
     ws: 'word-spacing: ',
-    lt: 'letter-spacing: ',
+    ls: 'letter-spacing: ',
     a: 'animation: ',
     tsf: 'transform: ',
     tsl: 'translation: ',
+    bs: 'box-shadow: ',
+    ts: 'text-shadow: ',
     center: 'position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto',
     ell: 'text-overflow: ellipsis; white-space: nowrap; overflow: hidden',
     clip: 'position: absolute; clip: rect(0 0 0 0)'
@@ -101,10 +102,17 @@ function qCss(extension) {
   var valueMap = {
     s: 'solid',
     d: 'dashed',
-    dot: 'dotted',
-    t: 'transparent',
+    tt: 'transparent',
     cc: 'currentColor',
-    n: 'normal'
+    n: 'normal',
+    c: 'center',
+    rx: 'repeat-x',
+    ry: 'repeat-y',
+    no: 'no-repeat',
+    l: 'left',
+    t: 'top',
+    r: 'right',
+    b: 'bottom'
   };
 
   extension = extension || 'css';
