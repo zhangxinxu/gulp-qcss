@@ -8,6 +8,9 @@
     "css",
     "efficiency"
   ],
+  "scripts": { 
+    "test": "./test gulp" 
+  },
   "homepage": "https://github.com/zhangxinxu/gulp-qcss",
   "bugs": {
     "url": "https://github.com/zhangxinxu/gulp-qcss/issues"
