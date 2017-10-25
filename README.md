@@ -11,7 +11,7 @@ var qcss = require('gulp-qcss');
 
 gulp.task('default', function () {
     gulp.src('src/test.qcss')
-        .pipe(qcss())
+        .pipe(qcss())    // or .pipe(qcss('sass')) if u needed! Default to .css extension.
         .pipe(gulp.dest('dist/'));
 });
 </pre>
