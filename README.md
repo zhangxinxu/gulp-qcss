@@ -206,3 +206,9 @@ $light = #eee;
 $font = 'Microsoft yahei';
 */
 </pre>
+
+and will replace this:
+<pre>.class { bg light; }</pre>
+
+to:
+<pre>.class { background: #eee }</pre>
