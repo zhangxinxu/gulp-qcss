@@ -3,6 +3,7 @@ write css quickly as rocket!
 
 ## Use example
 
+<pre>npm install gulp-qcss</pre>
 <pre>
 var gulp = require('gulp');
 
