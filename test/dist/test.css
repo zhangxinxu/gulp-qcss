@@ -1,3 +1,8 @@
+/*
+$blue = #00a050;
+$light = #eee;
+$font = 'Microsoft yahei';
+*/
 .clear{clear: both}.center{text-align: center;}.hidden{display: none;}hr{display: none;}
 .ml2{margin-left: 2px}.ml5{margin-left: 5px;}.ml10{margin-left: 10px;}.m5{margin: 5px;}
 .imgpad{padding: 3px; border: #ccc;}
@@ -10,7 +15,7 @@
 span.s{font-size: 0.9em; color: #999;}
 h2.pagetitle {margin-top: 30px; text-align: center;}h3{padding: 0; margin: 30px 0 0; font-weight: normal; font-style: normal}.entry h3{margin-top: 18px}h3{font-size: 1.3em;}
 body.category h3{font-size: 1.5em; margin-top: 10px;}
-.zxx_code{padding: 10px; margin: 5px 0; font-size: 12px; background: #eeeeee; border: 1px dashed #ccc; clear: both; zoom: 1;}
+.zxx_code{padding: 10px; margin: 5px 0; font-size: 12px; background: #eee; border: 1px dashed #ccc; clear: both; zoom: 1;}
 .zxx_code pre{margin: 0; color: #00F; white-space: pre-wrap; word-wrap: break-word;}
 img.centered {display: block; margin-left: auto; margin-right: auto;}
 img.alignright {padding: 4px; margin: 0 0 2px 7px; display: inline;}img.alignleft {padding: 4px; margin: 0 7px 3px 0; display: inline;}

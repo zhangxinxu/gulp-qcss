@@ -125,7 +125,25 @@ function qCss(extension) {
     }
 
     if (file.isBuffer()) {
-      file.contents = Buffer.concat([new Buffer(file.contents.toString('utf8').replace( /\{([\w\W]*?)\}/g, function (matchs, $1) {
+      var contents = file.contents.toString('utf8');
+
+      // 计算出文件中设置的隐射
+      var valueMapCustom = {};
+
+      contents.replace(/\/\*([\w\W]*?)\*\//, function (matchs, $1) {
+        $1.split(';').forEach(function (parts) {
+          var needPart = parts.split('$')[1];
+          if (needPart && needPart.split('=').length == 2) {
+            var keyValue = needPart.split('=');
+            if (keyValue[1].trim() && keyValue[0].trim()) {
+              valueMapCustom[keyValue[0].trim()] = keyValue[1].trim();
+            }
+          }
+        });
+      });
+
+
+      file.contents = Buffer.concat([new Buffer(contents.replace( /\{([\w\W]*?)\}/g, function (matchs, $1) {
         var prefix = '{', suffix = '}';
         // 查询语句处理
         if (/\{/.test($1)) {
@@ -160,7 +178,7 @@ function qCss(extension) {
                 parts = (keyMap[parts] || parts).replace(':', '').trim();
               } else if (key != 'a') {
                 // CSS动画不对值进行替换
-                parts = valueMap[parts] || parts;
+                parts = valueMapCustom[parts] || valueMap[parts] || parts;
               }
 
               return parts;

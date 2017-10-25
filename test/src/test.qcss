@@ -1,3 +1,8 @@
+/*
+$blue = #00a050;
+$light = #eee;
+$font = 'Microsoft yahei';
+*/
 .clear{cl}.center{tc;}.hidden{dn;}hr{dn;}
 .ml2{ml2}.ml5{ml5;}.ml10{ml10;}.m5{m5;}
 .imgpad{p3; bd#ccc;}
@@ -13,7 +18,7 @@ f13; p4 0 4 8;}
 span.s{f0.9em; c#999;}
 h2.pagetitle {mt30;tc;}h3{p0;m30 0 0;n}.entry h3{mt18}h3{f1.3em;}
 body.category h3{f1.5em; mt10;}
-.zxx_code{p10; m5 0; f12; bg#eeeeee; bd1 d #ccc; cl; z1;}
+.zxx_code{p10; m5 0; f12; bg light; bd1 d #ccc; cl; z1;}
 .zxx_code pre{m0; c#00F; prew; bkw;}
 img.centered {db;mla;mra;}
 img.alignright {p4;m0 0 2 7;di;	}img.alignleft {p4;m0 7 3 0;di;}
@@ -21,7 +26,7 @@ img.alignright {p4;m0 0 2 7;di;	}img.alignleft {p4;m0 7 3 0;di;}
 p{p8 0; m0;}
 .a_link{tdl;tsl op .2s;}.a_link:hover{c#f30; tdn;}
 img{bd0;}.vimg{mb-3;}
-code{br3; p0 4; font-family: 'Microsoft yahei';}
+code{br3; p0 4; ff font;}
 @media all and (max-width:320px) {
 .da_inner{w calc(100vw - 24px);}
 .top_da{h262;}
