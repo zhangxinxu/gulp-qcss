@@ -196,6 +196,10 @@ function qCss(extension) {
             return key + value.trim();
           });
         }).join(';\n' + space).trim() + suffix;
+      }).replace(/\w\{/g, function (matchs) {
+        return matchs.replace('{', ' {');
+      }).replace(/\}(\.|#|\:|\[|\w)/g, function (matchs) {
+        return matchs.replace('}', '}\n');
       }))]);
     }
 
