@@ -91,7 +91,7 @@ function qCss(extension) {
     ls: 'letter-spacing: ',
     a: 'animation: ',
     tsf: 'transform: ',
-    tsl: 'translation: ',
+    tsl: 'transition: ',
     bs: 'box-shadow: ',
     ts: 'text-shadow: ',
     center: 'position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto',
@@ -109,6 +109,7 @@ function qCss(extension) {
     rx: 'repeat-x',
     ry: 'repeat-y',
     no: 'no-repeat',
+    ih: 'inherit',
     l: 'left',
     t: 'top',
     r: 'right',
@@ -144,10 +145,13 @@ function qCss(extension) {
 
 
       file.contents = Buffer.concat([new Buffer(contents.replace( /\{([\w\W]*?)\}/g, function (matchs, $1) {
-        var prefix = '{', suffix = '}';
+        var space = '    ';
+        var prefix = '{\n' + space, suffix = '\n}';
         // 查询语句处理
         if (/\{/.test($1)) {
-          prefix = '{' + $1.split('{')[0] + '{';
+          suffix = '\n' + space + '}';
+          space = space + space;
+          prefix = '{' + $1.split('{')[0] + '{\n' + space;
 
           $1 = $1.split('{')[1];
         }
@@ -171,7 +175,9 @@ function qCss(extension) {
 
               if (!isNaN(parts)) {
                 // 数值自动加px单位
-                if (/^zx|op|z|fw$/.test(key) == false && parts != '0') {
+                if (key == 'lh' && parts < 5) {
+                  return parts;
+                } else if (/^(?:zx|op|z|fw)$/.test(key) == false && parts != '0') {
                   parts = parts + 'px';
                 }
               } else if (key == 'tsl') {
@@ -185,11 +191,11 @@ function qCss(extension) {
             }).join(' ');
 
             // 键转换
-            key = keyMap[key] || key;
+            key = keyMap[key] || key + ': ';
 
             return key + value.trim();
           });
-        }).join('; ').trim() + suffix;
+        }).join(';\n' + space).trim() + suffix;
       }))]);
     }
 
