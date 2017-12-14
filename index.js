@@ -94,6 +94,7 @@ function qCss(extension) {
     tsl: 'transition: ',
     bs: 'box-shadow: ',
     ts: 'text-shadow: ',
+    con: 'content: ',
     center: 'position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto',
     ell: 'text-overflow: ellipsis; white-space: nowrap; overflow: hidden',
     clip: 'position: absolute; clip: rect(0 0 0 0)'
@@ -165,6 +166,7 @@ function qCss(extension) {
           if (state.indexOf(':') != -1) {
             return state;
           }
+          // state指一段声明，例如f 20，此时下面的key是f, value是20
           return state.replace(/^([a-z]+)(.*)$/g, function (matchs, key, value) {
             // 值主要是增加单位，和一些关键字转换
             value = (value || '').split(' ').map(function (parts) {
@@ -175,12 +177,14 @@ function qCss(extension) {
 
               if (!isNaN(parts)) {
                 // 数值自动加px单位
+                // 但不包括行号，opacity, z-index, zoom, font-weight以及calc计算
                 if (key == 'lh' && parts < 5) {
                   return parts;
-                } else if (/^(?:zx|op|z|fw)$/.test(key) == false && parts != '0') {
+                } else if (/^(?:zx|op|z|fw)$/.test(key) == false && parts != '0' && /^calc/.test(value.trim()) == false) {
                   parts = parts + 'px';
                 }
               } else if (key == 'tsl') {
+                // transition变换属性关键字也支持简化书写
                 parts = (keyMap[parts] || parts).replace(':', '').trim();
               } else if (key != 'a') {
                 // CSS动画不对值进行替换
