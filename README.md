@@ -275,6 +275,10 @@ property and declaration map:
   zx: 'z-index: ',
   h: 'height: ',
   w: 'width: ',
+  minw: 'min-width: ',
+  maxw: 'max-width: ',
+  minh: 'min-height: ',
+  maxh: 'max-height: ',
   lh: 'line-height: ',
   v: 'vertical-align: ',
   vt: 'vertical-align: top',
@@ -298,6 +302,7 @@ property and declaration map:
   tsl: 'transition: ',
   bs: 'box-shadow: ',
   ts: 'text-shadow: ',
+  con: 'content: ',
   center: 'position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto',
   ell: 'text-overflow: ellipsis; white-space: nowrap; overflow: hidden',
   clip: 'position: absolute; clip: rect(0 0 0 0)'
