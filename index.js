@@ -133,14 +133,14 @@ function qCss(extension) {
     if (file.isBuffer()) {
       var contents = file.contents.toString('utf8');
 
-      // 计算出文件中设置的隐射
+      // 计算出文件中设置的映射
       var valueMapCustom = {};
 
       contents.replace(/\/\*([\w\W]*?)\*\//, function (matchs, $1) {
         $1.split(';').forEach(function (parts) {
           var needPart = parts.split('$')[1];
-          if (needPart && needPart.split('=').length == 2) {
-            var keyValue = needPart.split('=');
+          if (needPart && needPart.split(/=|:/).length == 2) {
+            var keyValue = needPart.split(/=|:/);
             if (keyValue[1].trim() && keyValue[0].trim()) {
               valueMapCustom[keyValue[0].trim()] = keyValue[1].trim();
             }
