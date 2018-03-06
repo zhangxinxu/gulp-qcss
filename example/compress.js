@@ -33,17 +33,17 @@ let urlHtmlCl = './dist/taobao-cl.html';
             let length = data.length;
 
             //去除注释
-            data = data.replace(/\/\*((.|\n|\t)*?)\*\//g,"")
+            data = data.replace(/\/\*((.|\n|\t)*?)\*\//g, '')
             //除去首尾空格
-            .replace(/(\s)*{\s*/g,"{").replace(/(\s)*}\s*/g,"}")
+            .replace(/(\s)*{\s*/g,"{").replace(/(\s)*}\s*/g, '}')
             //去除样式间空格
-            .replace(/(\s)*;\s*/g,";")
+            .replace(/(\s)*;\s*/g, ';')
             //去除样式名称后面空格
-            .replace(/:(\s)*/g,":")
+            .replace(/:(\s)*/g, ':')
             //去除换行符
-            .replace(/(\n|\t)+/g,"")
+            .replace(/(\n|\t)+/g, '')
             //去除末尾分号
-            .replace(/;}/g,"}");
+            .replace(/;}/g, '}').trim();
 
             fs.writeFile(to, data, function () {
                 console.log(from + '压缩为' + to + '成功，压缩率为：' + Math.round(10000 * (length - data.length) / length) / 100 + '%');
@@ -93,7 +93,7 @@ let urlHtmlCl = './dist/taobao-cl.html';
                         }
                         return className;
                     }).join(' ') + '"';
-                });
+                }).replace('/taobao.css"', '/taobao-min-cl.css"');
                 // 写入压缩后的HTML
                 fs.writeFile(urlHtmlCl, data, function () {
                     console.log(urlHtmlCl + '类名压缩成功');
@@ -148,7 +148,7 @@ let urlHtmlCl = './dist/taobao-cl.html';
     CSSclassNameReplace: function (data) {
         var self = this;
         // 不参与压缩的类名
-        var arrClassNameIgnore = [''];
+        var arrClassNameIgnore = ['png', 'gif', 'jpg'];
 
         console.log('CSS压缩类名缓存中...');
         return data.replace(/\.[a-z][a-z0-9]*(?:[\-\_]\w+)*/gi, function(matchs) {

@@ -347,7 +347,7 @@ body {
 
 .product_list li a {
     display: block;
-    line-height:;
+    line-height: 27px;
     padding-left: 37px;
     position: relative;
     zoom: 1;
@@ -623,7 +623,7 @@ body {
 }
 
 .mall_prev,.mall_next {
-    height: 22px;
+    width: 22px;
     height: 34px;
     outline: none;
     position: absolute;
@@ -782,7 +782,7 @@ body {
 
 #category .hd h3 a {
     display: block;
-    height: 89px;
+    width: 89px;
     line-height: 26px;
     margin: 1px;
     font-size: 14px;
@@ -912,7 +912,7 @@ body {
 }
 
 .category_ad {
-    height: 98px;
+    height: 84px;
     padding-top: 12px;
     text-align: center;
     font-size: 0;
@@ -1401,8 +1401,8 @@ body {
 .links_panel li a {
     display: block;
     line-height: 22px;
-    pl15
-    bgp-162px -281px;
+    padding-left: 15px;
+    background-position: -162px -281px;
     zoom: 1;
 }
 

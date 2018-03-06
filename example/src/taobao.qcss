@@ -282,7 +282,7 @@ body {
 .search_btn {
     w135;
     h29;
-    f16px;
+    f16;
     b;
     c white;
     bgc#FB8502;
@@ -347,7 +347,7 @@ body {
 
 .product_list li a {
     db;
-    lh;
+    lh27;
     pl37;
     rel;
     z1;
@@ -623,7 +623,7 @@ body {
 }
 
 .mall_prev,.mall_next {
-    h22;
+    w22;
     h34;
     o none;
     abs;
@@ -782,7 +782,7 @@ body {
 
 #category .hd h3 a {
     db;
-    h89;
+    w89;
     lh26;
     m1;
     f14px;
@@ -912,7 +912,7 @@ body {
 }
 
 .category_ad {
-    h98;
+    h84;
     pt12;
     tc;
     f0;
@@ -1388,7 +1388,7 @@ body {
 
 .links_panel h4 {
     mb6;
-    f16px;
+    f16;
     tc;
     c#17387D;
     lh22;
@@ -1401,8 +1401,8 @@ body {
 .links_panel li a {
     db;
     lh22;
-    pl15
-    bgp-162px -281px;
+    pl15;
+    bgp-162 -281;
     z1;
 }
 
