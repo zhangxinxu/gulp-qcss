@@ -46,6 +46,9 @@ function qCss(extension) {
         bdr: 'border-right: ',
         bdt: 'border-top: ',
         bdb: 'border-bottom: ',
+        bds: 'border-style: ',
+        bdw: 'border-width: ',
+        bdc: 'border-color: ',
         br: 'border-radius: ',
         bbb: 'box-sizing: border-box',
         o: 'outline: ',
@@ -62,11 +65,12 @@ function qCss(extension) {
         tl: 'text-align: left',
         tr: 'text-align: right',
         tj: 'text-align: justify',
+        ti: 'text-indent: ',
         cl: 'clear: both',
         abs: 'position: absolute',
         rel: 'position: relative',
         fix: 'position: fixed',
-        opa: 'opacity: ',
+        op: 'opacity: ',
         z: 'zoom: ',
         zx: 'z-index: ',
         h: 'height: ',
@@ -82,6 +86,7 @@ function qCss(extension) {
         vb: 'vertical-align: bottom',
         poi: 'cursor: pointer',
         def: 'cursor: default',
+        tex: 'cursor: text',
         ovh: 'overflow: hidden',
         ova: 'overflow: auto',
         vh: 'visibility: hidden',
@@ -105,6 +110,7 @@ function qCss(extension) {
     };
 
     var valueMap = {
+        a: 'auto',
         s: 'solid',
         d: 'dashed',
         tt: 'transparent',
@@ -203,7 +209,7 @@ function qCss(extension) {
 									// 不包括行高
 									if (key == 'lh' && parts < 5) {
 										return parts;
-									} else if (/^(?:zx|opa|z|fw)$/.test(key) == false && parts != '0' && /^calc/.test(multiple.trim()) == false) {
+									} else if (/^(?:zx|op|z|fw)$/.test(key) == false && parts != '0' && /^calc/.test(multiple.trim()) == false) {
 										parts = parts + 'px';
 									}
 								} else if (key == 'tsl') {
