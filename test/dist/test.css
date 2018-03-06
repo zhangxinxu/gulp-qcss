@@ -71,7 +71,8 @@ h2.pagetitle {
 h3 {
     padding: 0;
     margin: 30px 0 0;
-    font-weight: normal; font-style: normal
+    font-weight: normal;
+    font-style: normal
 }
 .entry h3 {
     margin-top: 18px
@@ -144,8 +145,8 @@ code {
 }
 @media all and (max-width:320px) {
 .da_inner {
-        width: calc(100vw - 24px);
-    }
+    width: calc(100vw - 24px);
+}
 .top_da {
     height: 262px;
 }
