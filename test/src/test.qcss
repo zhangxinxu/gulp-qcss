@@ -27,8 +27,15 @@ p{p8 0; m0;}
 .a_link{tdl;tsl op .2s;}.a_link:hover{c#f30; tdn;}
 img{bd0;}.vimg{mb-3;}
 code{br3; p0 4; ff font;}
+.m-bg {
+    bg url(example.jpg) no calc(100% - 30px * 2 ) b, linear-gradient(to t, #333, #999);
+}
+.m-clac{m 9 10 calc(4px / 2 + 4px + 9 * 4px) 0;}
 @media all and (max-width:320px) {
-.da_inner{w calc(100vw - 24px);}
-.top_da{h262;}
-.top_da_out::before{dn}
+    .da_inner{w calc(100vw - 24px);}
+    .top_da{h262;}
+    .top_da_out::before{dn}
+}
+@supports (max-width: 100px) {
+    body { bg red;  }
 }

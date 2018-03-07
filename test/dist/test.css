@@ -143,14 +143,25 @@ code {
     padding: 0 4px;
     font-family: 'Microsoft yahei';
 }
-@media all and (max-width:320px) {
-.da_inner {
-    width: calc(100vw - 24px);
+.m-bg {
+    background: url(example.jpg) no-repeat calc(100% - 30px * 2 ) bottom, linear-gradient(to top, #333, #999);
 }
-.top_da {
+.m-clac {
+    margin: 9px 10px calc(4px / 2 + 4px + 9 * 4px) 0;
+}
+@media all and (max-width:320px) {
+    .da_inner {
+        width: calc(100vw - 24px);
+    }
+    .top_da {
     height: 262px;
 }
-.top_da_out::before {
+    .top_da_out::before {
     display: none
 }
+}
+@supports (max-width: 100px) {
+    body {
+        background: red;
+    }
 }

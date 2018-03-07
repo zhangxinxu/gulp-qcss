@@ -10,6 +10,8 @@ stat = fs.stat;
 const path = require('path');
 const url = require('url');
 
+const cssmin = require('../mini/cssmin');
+
 
 let urlQcss = './src/taobao.qcss';
 let urlQcssMini = './src/taobao-min.qcss';
@@ -33,17 +35,7 @@ let urlHtmlCl = './dist/taobao-cl.html';
             let length = data.length;
 
             //去除注释
-            data = data.replace(/\/\*((.|\n|\t)*?)\*\//g, '')
-            //除去首尾空格
-            .replace(/(\s)*{\s*/g,"{").replace(/(\s)*}\s*/g, '}')
-            //去除样式间空格
-            .replace(/(\s)*;\s*/g, ';')
-            //去除样式名称后面空格
-            .replace(/:(\s)*/g, ':')
-            //去除换行符
-            .replace(/(\n|\t)+/g, '')
-            //去除末尾分号
-            .replace(/;}/g, '}').trim();
+            data = cssmin(data);
 
             fs.writeFile(to, data, function () {
                 console.log(from + '压缩为' + to + '成功，压缩率为：' + Math.round(10000 * (length - data.length) / length) / 100 + '%');
