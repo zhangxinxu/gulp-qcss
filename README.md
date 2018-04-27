@@ -1,350 +1,96 @@
-# gulp-qcss
-write css quickly as rocket!
+虽然本项目名称中出现了gulp，但是，实际上，没有gulp只是偏角一隅，没有也一样可以使用。
 
-## Use example
+# QCSS - CSS快速书写和新式CSS压缩小工具
 
+自己弄的一个Node.js小工具，本打算作为私藏水果刀平时随便用用，一番折腾和试用，发现原来是把斩仙刀，可以好好整整推一推。
+
+## 关于QCSS
+
+QCSS是Quick CSS的缩写，寓意是CSS书写快步如飞！
+
+平常我们写CSS是这样：
+<pre>.class-a {
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  left: 100px;
+  top: 100px;
+}</pre>
+
+如果QCSS书写，则是：
+
+<pre>.class-a {
+  w300; h150; abs; l100; t100;
+}</pre>
+
+少写了好多代码，感觉自己又年轻了许多。
+
+下面视频为QCSS编译为CSS的录屏，实际上书写的时候是一次保存，全部编译，视频为了演示，每写一句编译了一次。
+
+[![查看视频](https://qidian.qpic.cn/qidian_common/349573/57addd60e3796762aa64b82256eeac7d/0)](https://qidian.gtimg.com/acts/2018/5425561/video/qcss2css.mp4)
+
+QCSS本质上也是个预编译工具，和Less，Stylus工具相比，更专注于CSS快速书写能力，嵌套，函数全部都不支持，但支持自定义变量。
+
+更专注意味着更简单，更高效，同时在书写这一块更极致。
+
+简单高效：基于映射规则的字符替换，无任何依赖，仅几K JS大小，移植到web上几乎无成本；
+书写极致：可以自定义属性缩写，还可以自定义属性值缩写，甚至还可以自定义多个CSS声明片段缩写。仅需要分号分隔，px单位默认可缺省。
+
+## 如何使用QCSS？
+
+### 1. 纯node.js使用
+
+项目根目录下的<code>node-qcss.js</code>中有两个变量，为<code>pathSrcQcss</code>和<code>pathDistQcss</code>，分别对应QCSS文件目录和编译出来的CSS文件所在目录。
+
+<img src="https://qidian.qpic.cn/qidian_common/349573/5e64e0fbac92adde29294b74141c831f/0" width="466" height="102">
+
+只要配置这两个路径为你所需要的路径。然后，直接下面这一句就可以使用了：
+
+<pre>node node-qcss</pre>
+
+直接<code>node-qcss.js</code>这个JS就可以了，可以在任意目录位置，运行后，自动QCSS编译并开启资源监控，非常轻便轻量。
+
+默认<code>node-qcss.js</code>会在同目录下寻找<code>qcss-web</code>这个模块，如果没有，就会直接在线拉取最新的<code>qcss-map</code>和<code>qcss-web</code>这两个模块（只会执行一次）。
+
+因此，实际开发只需要：
+1. <code>node-qcss.js</code>放在合适位置；
+2. 配置其中<code>pathSrcQcss</code>和<code>pathDistQcss</code>的路径值；
+3. <code>node node-qcss</code>运行；
+
+就完成啦，非常简单轻便！
+
+### 2. gulp插件使用
+
+gulp插件核心代码为根目录下的<code>index.js</code>
+
+实际使用，步骤如下：
+1. 按照<code>gulp-qcss</code>插件：
 <pre>npm install gulp-qcss</pre>
+2. 注册任务：
 <pre>
 var gulp = require('gulp');
-
 var qcss = require('gulp-qcss');
-
+// gulp任务
 gulp.task('default', function () {
     gulp.src('src/test.qcss')
-        .pipe(qcss())    // or .pipe(qcss('sass')) if u needed! Default to .css extension.
+        .pipe(qcss())    // 或者.pipe(qcss('sass')) 如果有需要的话，默认是.css后缀
         .pipe(gulp.dest('dist/'));
 });
 </pre>
 
-will change this:
+然后就可以啦！具体可以参见<code>/test/</code>目录中的测试兼演示。
 
-<pre>
-/*
-$blue = #00a050;
-$light = #eee;
-$font = 'Microsoft yahei';
-*/
-.clear{cl}.center{tc;}.hidden{dn;}hr{dn;}
-.ml2{ml2}.ml5{ml5;}.ml10{ml10;}.m5{m5;}
-.imgpad{p3; bd#ccc;}
-.f11{f1.1em;}.f12{f1.2em;}
-#link{
-bg#f5f5f5;
-bdl5 s #ccc;
-f13; p4 0 4 8;}
-.params_table{bg#a0b3d6; f12;}
-.params_table th{bg#f0f3f9; bd3 s #fff; tc}
-.params_table td{bgc#f9f9f9; p2 4; bd3 s #fff;}
-.params_table tr:hover{op.9;}
-span.s{f0.9em; c#999;}
-h2.pagetitle {mt30;tc;}h3{p0;m30 0 0;n}.entry h3{mt18}h3{f1.3em;}
-body.category h3{f1.5em; mt10;}
-.zxx_code{p10; m5 0; f12; bg light; bd1 d #ccc; cl; z1;}
-.zxx_code pre{m0; c#00F; prew; bkw;}
-img.centered {db;mla;mra;}
-img.alignright {p4;m0 0 2 7;di;	}img.alignleft {p4;m0 7 3 0;di;}
-.alignright {l;}.alignleft {r;}
-p{p8 0; m0;}
-.a_link{tdl;tsl op .2s;}.a_link:hover{c#f30; tdn;}
-img{bd0;}.vimg{mb-3;}
-code{br3; p0 4; ff font;}
-@media all and (max-width:320px) {
-.da_inner{w calc(100vw - 24px);}
-.top_da{h262;}
-.top_da_out::before{dn}
-}
-</pre>
+## QCSS实现的原理
+明天更新...
 
-to this:
+## QCSS的映射规则
+明天更新...
 
-<pre>/*
-$blue = #00a050;
-$light = #eee;
-$font = 'Microsoft yahei';
-*/
-.clear {
-    clear: both
-}
-.center {
-    text-align: center;
-}
-.hidden {
-    display: none;
-}
-hr {
-    display: none;
-}
-.ml2 {
-    margin-left: 2px
-}
-.ml5 {
-    margin-left: 5px;
-}
-.ml10 {
-    margin-left: 10px;
-}
-.m5 {
-    margin: 5px;
-}
-.imgpad {
-    padding: 3px;
-    border: #ccc;
-}
-.f11 {
-    font-size: 1.1em;
-}
-.f12 {
-    font-size: 1.2em;
-}
-#link {
-    background: #f5f5f5;
-    border-left: 5px solid #ccc;
-    font-size: 13px;
-    padding: 4px 0 4px 8px;
-}
-.params_table {
-    background: #a0b3d6;
-    font-size: 12px;
-}
-.params_table th {
-    background: #f0f3f9;
-    border: 3px solid #fff;
-    text-align: center
-}
-.params_table td {
-    background-color: #f9f9f9;
-    padding: 2px 4px;
-    border: 3px solid #fff;
-}
-.params_table tr:hover {
-    opacity: .9;
-}
-span.s {
-    font-size: 0.9em;
-    color: #999;
-}
-h2.pagetitle {
-    margin-top: 30px;
-    text-align: center;
-}
-h3 {
-    padding: 0;
-    margin: 30px 0 0;
-    font-weight: normal; font-style: normal
-}
-.entry h3 {
-    margin-top: 18px
-}
-h3 {
-    font-size: 1.3em;
-}
-body.category h3 {
-    font-size: 1.5em;
-    margin-top: 10px;
-}
-.zxx_code {
-    padding: 10px;
-    margin: 5px 0;
-    font-size: 12px;
-    background: #eee;
-    border: 1px dashed #ccc;
-    clear: both;
-    zoom: 1;
-}
-.zxx_code pre {
-    margin: 0;
-    color: #00F;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-img.centered {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-img.alignright {
-    padding: 4px;
-    margin: 0 0 2px 7px;
-    display: inline;
-}
-img.alignleft {
-    padding: 4px;
-    margin: 0 7px 3px 0;
-    display: inline;
-}
-.alignright {
-    float: left;
-}
-.alignleft {
-    float: right;
-}
-p {
-    padding: 8px 0;
-    margin: 0;
-}
-.a_link {
-    text-decoration: underline;
-    transition: opacity .2s;
-}
-.a_link:hover {
-    color: #f30;
-    text-decoration: none;
-}
-img {
-    border: 0;
-}
-.vimg {
-    margin-bottom: -3px;
-}
-code {
-    border-radius: 3px;
-    padding: 0 4px;
-    font-family: 'Microsoft yahei';
-}
-@media all and (max-width:320px) {
-.da_inner {
-    width: calc(100vw - 24px);
-}
-.top_da {
-    height: 262px;
-}
-.top_da_out::before {
-    display: none
-}
-}</pre>
+## QCSS的其他功能
+明天更新...
 
-## replace rules
+## QCSS衍生出的超高压缩比CSS压缩工具css2qcss
 
-property and declaration map:
+同时，由于Service Worker的存在，我们可以把QCSS直接注册在浏览器中，于是我们可以直接请求<code>.qcss</code>文件，节省流量传输。如何方面快速得到体积几乎小了50%的<code>.qcss</code>文件呢？使用项目中的<code>css2qcss.js</code>这个压缩工具即可。
 
-<pre>{
-  dn: 'display: none',
-  di: 'display: inline',
-  dib: 'display: inline-block',
-  db: 'display: block',
-  dt: 'display: table',
-  dtc: 'display: table-cell',
-  m: 'margin: ',
-  ml: 'margin-left: ',
-  mt: 'margin-top: ',
-  mr: 'margin-right: ',
-  mb: 'margin-bottom: ',
-  ma: 'margin: auto',
-  mla: 'margin-left: auto',
-  mra: 'margin-right: auto',
-  p: 'padding: ',
-  pl: 'padding-left: ',
-  pt: 'padding-top: ',
-  pr: 'padding-right: ',
-  pb: 'padding-bottom: ',
-  l: 'float: left',
-  r: 'float: right',
-  bg: 'background: ',
-  bgc: 'background-color: ',
-  bgi: 'background-image: ',
-  bgr: 'background-repeat: ',
-  bgp: 'background-position: ',
-  c: 'color: ',
-  bd: 'border: ',
-  bdl: 'border-left: ',
-  bdr: 'border-right: ',
-  bdt: 'border-top: ',
-  bdb: 'border-bottom: ',
-  bds: 'border-style: ',
-  bdw: 'border-width: ',
-  bdc: 'border-color: ',
-  br: 'border-radius: ',
-  bbb: 'box-sizing: border-box',
-  o: 'outline: ',
-  f: 'font-size: ',
-  ff: 'font-family: ',
-  fs: 'font-style: ',
-  fw: 'font-weight: ',
-  b: 'font-weight: bold',
-  i: 'font-style: italic',
-  n: 'font-weight: normal; font-style: normal',
-  tdl: 'text-decoration: underline',
-  tdn: 'text-decoration: none',
-  tc: 'text-align: center',
-  tl: 'text-align: left',
-  tr: 'text-align: right',
-  tj: 'text-align: justify',
-  ti: 'text-indent: ',
-  cl: 'clear: both',
-  abs: 'position: absolute',
-  rel: 'position: relative',
-  fix: 'position: fixed',
-  op: 'opacity: ',
-  z: 'zoom: ',
-  zx: 'z-index: ',
-  h: 'height: ',
-  w: 'width: ',
-  minw: 'min-width: ',
-  maxw: 'max-width: ',
-  minh: 'min-height: ',
-  maxh: 'max-height: ',
-  lh: 'line-height: ',
-  v: 'vertical-align: ',
-  vt: 'vertical-align: top',
-  vm: 'vertical-align: middle',
-  vb: 'vertical-align: bottom',
-  poi: 'cursor: pointer',
-  def: 'cursor: default',
-  tex: 'cursor: text',
-  ovh: 'overflow: hidden',
-  ova: 'overflow: auto',
-  vh: 'visibility: hidden',
-  vv: 'visibility: visible',
-  prew: 'white-space: pre-wrap',
-  pre: 'white-space: pre',
-  nowrap: 'white-space: nowrap',
-  bk: 'word-break: break-all',
-  bkw: 'word-wrap: break-word',
-  ws: 'word-spacing: ',
-  ls: 'letter-spacing: ',
-  a: 'animation: ',
-  tsf: 'transform: ',
-  tsl: 'transition: ',
-  bs: 'box-shadow: ',
-  ts: 'text-shadow: ',
-  con: 'content: ',
-  center: 'position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto',
-  ell: 'text-overflow: ellipsis; white-space: nowrap; overflow: hidden',
-  clip: 'position: absolute; clip: rect(0 0 0 0)'
-}</pre>
 
-value map:
-
-<pre>{
-  a: 'auto',
-  s: 'solid',
-  d: 'dashed',
-  tt: 'transparent',
-  cc: 'currentColor',
-  n: 'normal',
-  c: 'center',
-  rx: 'repeat-x',
-  ry: 'repeat-y',
-  no: 'no-repeat',
-  ih: 'inherit',
-  l: 'left',
-  t: 'top',
-  r: 'right',
-  b: 'bottom'
-}</pre>
-
-support custom value-map rule by add comments like this:
-
-<pre>
-/*
-$blue = #00a050;
-$light = #eee;
-$font = 'Microsoft yahei';
-*/
-</pre>
-
-and will replace this:
-<pre>.class { bg light; }</pre>
-
-to:
-<pre>.class { background: #eee }</pre>
