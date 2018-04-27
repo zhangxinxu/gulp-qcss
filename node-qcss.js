@@ -1,6 +1,9 @@
-/*
- * QCSS实时编译加速书写小工具
+/**
+ * @description QCSS实时编译加速书写小工具
  * 纯node版本测试
+ * 实际使用需要配置pathSrcQcss和pathDistQcss两个路径
+ * 因为使用了ES7 async和await，需要Node.js版本不能太老
+ * @author zhangxinxu(.com)
 */
 
 const fs = require('fs');
@@ -15,10 +18,12 @@ const https = require('https');
 const moduleQcssMap = './qcss-map';
 const moduleQcssWeb = './qcss-web';
 
+
 // pathSrcQcss是qcss文件夹目录
 // pathDistQcss是编译出来对应的css文件夹目录
-const pathSrcQcss = './src/';
-const pathDistQcss = './dist/';
+// 这两个是配置项
+const pathSrcQcss = './test-node-qcss/src/';
+const pathDistQcss = './test-node-qcss/dist/';
 
 /**
  * 异步在线获取qcss模块的方法
