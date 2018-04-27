@@ -27,7 +27,7 @@ QCSS是Quick CSS的缩写，寓意是CSS书写快步如飞！
 
 下面视频为QCSS编译为CSS的录屏，实际上书写的时候是一次保存，全部编译，视频为了演示，每写一句编译了一次。
 
-[![查看视频](https://qidian.qpic.cn/qidian_common/349573/57addd60e3796762aa64b82256eeac7d/0)](https://qidian.gtimg.com/acts/2018/5425561/video/qcss2css.mp4)
+<a href="https://qidian.gtimg.com/acts/2018/5425561/video/qcss2css.mp4" target="_blank" title="播放视频"><img src="https://qidian.qpic.cn/qidian_common/349573/57addd60e3796762aa64b82256eeac7d/0"></a>
 
 QCSS本质上也是个预编译工具，和Less，Stylus工具相比，更专注于CSS快速书写能力，嵌套，函数全部都不支持，但支持自定义变量。
 
