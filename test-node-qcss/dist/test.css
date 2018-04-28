@@ -126,7 +126,7 @@ p {
 }
 .a_link {
     text-decoration: underline;
-    transition: opacity .2s;
+    transition: op .2s;
 }
 .a_link:hover {
     color: #f30;
