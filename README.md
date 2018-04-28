@@ -72,7 +72,7 @@ gulp插件核心代码为根目录下的<code>index.js</code>
 实际使用，步骤如下：
 1. 按照<code>gulp-qcss</code>插件：
 ```JavaScript
-npm install gulp-qcss</pre>
+npm install gulp-qcss
 ```
 2. 注册任务：
 ```JavaScript
@@ -181,7 +181,9 @@ fs.readFile('./test/extra.css', 'utf8', (err, data) => {
     data = css2qcss(data);
 
     fs.writeFile('./test/extra.qcss', data, function () {
-        console.log('extra.qcss压缩成功，尺寸减小了：' + Math.round(10000 * (length - data.length) / length) / 100 + '%');
+        console.log('extra.qcss压缩成功，尺寸减小了：' + 
+          Math.round(10000 * (length - data.length) / length) / 100 + 
+        '%');
     });
 });
 ```
