@@ -9,19 +9,23 @@
 QCSS是Quick CSS的缩写，寓意是CSS书写快步如飞！
 
 平常我们写CSS是这样：
-<pre>.class-a {
+```CSS
+.class-a {
   width: 300px;
   height: 150px;
   position: absolute;
   left: 100px;
   top: 100px;
-}</pre>
+}
+```
 
 如果QCSS书写，则是：
 
-<pre>.class-a {
+```CSS
+.class-a {
   w300; h150; abs; l100; t100;
-}</pre>
+}
+```
 
 少写了好多代码，感觉自己又年轻了许多。
 
@@ -46,7 +50,9 @@ QCSS本质上也是个预编译工具，和Less，Stylus工具相比，更专注
 
 只要配置这两个路径为你所需要的路径。然后，直接下面这一句就可以使用了：
 
-<pre>node node-qcss</pre>
+```JavaScript
+node node-qcss
+```
 
 直接<code>node-qcss.js</code>这个JS就可以了，可以在任意目录位置，运行后，自动QCSS编译并开启资源监控，非常轻便轻量。
 
@@ -65,9 +71,11 @@ gulp插件核心代码为根目录下的<code>index.js</code>
 
 实际使用，步骤如下：
 1. 按照<code>gulp-qcss</code>插件：
-<pre>npm install gulp-qcss</pre>
+```JavaScript
+npm install gulp-qcss</pre>
+```
 2. 注册任务：
-<pre>
+```JavaScript
 var gulp = require('gulp');
 var qcss = require('gulp-qcss');
 // gulp任务
@@ -76,21 +84,105 @@ gulp.task('default', function () {
         .pipe(qcss())    // 或者.pipe(qcss('sass')) 如果有需要的话，默认是.css后缀
         .pipe(gulp.dest('dist/'));
 });
-</pre>
+```
 
 然后就可以啦！具体可以参见<code>/test/</code>目录中的测试兼演示。
 
 ## QCSS实现的原理
-明天更新...
+
+本质上就是个正则替换。
+
+我们对HTML字符进行转义的时候，会这么处理，一个映射对象，一个正则替换，如下：
+
+```JavaScript
+var keyMap = {
+  '<': '&lt;',
+  '>': '&gt;',
+  '&': '&amp;'
+};
+xxx.replace(/<|&|>/g, function(matchs) {
+  return keyMap[matchs];
+});
+```
+
+QCSS的实现也是如此：
+
+```JavaScript
+keyMap = {
+  dn: 'display: none',
+  db: 'display: block',
+  m: 'margin: ',
+  ml: 'margin-left: ',
+  …
+};
+css = qcss.replace(/* 替换细节 */);
+```
 
 ## QCSS的映射规则
-明天更新...
+
+· QCSS支持CSS属性缩写替换，例如：<code>width -&gt; w</code>
+· QCSS支持CSS声明缩写替换，例如：<code>display: none -&gt; dn</code>
+· QCSS支持多个CSS声明替换，例如：<code>text-overflow: ellipsis; white-space: nowrap; overflow: hidden -&gt; ell</code>
+
+不仅如此，QCSS还支持属性值关键字的映射，例如：<code>color: currentColor -&gt; c cc</code>，前面的<code>c</code>是<code>color</code>属性的缩写，后面的<code>cc</code>是<code>currentColor</code>关键字的缩写。
+
+完整映射规则可参见：<code>/qcss-map.js</code>
+
+内置的规则为自己多年缩写习惯，很多命名都是借鉴zxx.lib.css[https://github.com/zhangxinxu/zxx.lib.css] 由于不是粉色的，不可能所有人都喜欢这样的命名规则，所以，建议可以根据自己的习惯和喜好进行修改，添加。
 
 ## QCSS的其他功能
-明天更新...
+
+QCSS还支持自定义属性值变量，变量的声明是在注释中，变量名<code>$</code>开头，可以使用等号或冒号连接变量值，例如：
+
+```CSS
+/*
+$blue = #00a050;
+$light = #eee;
+$font: 'Microsoft yahei';
+*/
+```
+
+会替换下面这个：
+```CSS
+.class { bg light; ff font;}
+```
+为下面这样：
+```CSS
+.class { 
+    background: #eee;
+    font-family: 'Microsoft yahei'
+}
+```
 
 ## QCSS衍生出的超高压缩比CSS压缩工具css2qcss
 
-同时，由于Service Worker的存在，我们可以把QCSS直接注册在浏览器中，于是我们可以直接请求<code>.qcss</code>文件，节省流量传输。如何方面快速得到体积几乎小了50%的<code>.qcss</code>文件呢？使用项目中的<code>css2qcss.js</code>这个压缩工具即可。
+根据实际测试，QCSS文件比CSS文件体积可以小30%~50%（试选择器复杂度），很多人会表示，反正最后上线的都是CSS文件，哪怕你QCSS文件小80%也没有意义啊，其实不然。
 
+由于Service Worker的存在，我们可以把QCSS直接注册在浏览器中，于是我们可以直接请求<code>.qcss</code>文件，节省流量传输。
+
+为此，我特意写了个创新的CSS压缩工具，<code>css2qcss.js</code>，可以把目前的标准的CSS文件全部压缩成QCSS这种缩写形式，配合Service Worker，就可以让网站在CSS资源这块的传输小30%~50%，注意，这是相比压缩的CSS文件的数据，如果是开发版的CSS，则压缩率甚至可以到60%，比JavaScript主流压缩工具还要厉害。
+
+该压缩工具核心方法见：<code>/css2qcss.js</code>，依赖映射模块<code>/qcss-map.js</code>和CSS压缩模块<code>/mini/cssmin.js</code>。
+
+然后自己想要压缩文件的时候，读写文件即可，具体案例可参见：https://github.com/zhangxinxu/gulp-qcss/blob/master/mini/run.js
+
+代码如下：
+
+```JavaScript
+/**
+ * 压缩测试的脚本
+ */
+const fs = require('fs');
+const css2qcss = require('../css2qcss');
+
+fs.readFile('./test/extra.css', 'utf8', (err, data) => {
+    let length = data.length;
+    //去除注释
+    data = css2qcss(data);
+
+    fs.writeFile('./test/extra.qcss', data, function () {
+        console.log('extra.qcss压缩成功，尺寸减小了：' + Math.round(10000 * (length - data.length) / length) / 100 + '%');
+    });
+});
+```
 
