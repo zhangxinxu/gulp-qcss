@@ -37,7 +37,7 @@ QCSS本质上也是个预编译工具，和Less，Stylus工具相比，更专注
 
 更专注意味着更简单，更高效，同时在书写这一块更极致。
 
-简单高效：基于映射规则的字符替换，无任何依赖，仅几K JS大小，移植到web上几乎无成本；
+简单高效：基于映射规则的字符替换，无任何依赖，仅几K JS大小，移植到web上几乎无成本；<br>
 书写极致：可以自定义属性缩写，还可以自定义属性值缩写，甚至还可以自定义多个CSS声明片段缩写。仅需要分号分隔，px单位默认可缺省。
 
 ## 如何使用QCSS？
@@ -85,8 +85,27 @@ gulp.task('default', function () {
         .pipe(gulp.dest('dist/'));
 });
 ```
-
 然后就可以啦！具体可以参见<code>/test/</code>目录中的测试兼演示。
+
+### 3. web中使用
+
+主要是项目根目录下的<code>qcss-web.js</code>。默认为模块化加载：
+```JavaScript
+module.exports = function (data) {
+
+}
+```
+
+如果希望直连，可以改造下：
+
+```JavaScript
+var qcss2css = function (data) {
+
+}
+```
+其中<code>data</code>指QCSS字符内容，返回的是编译后的CSS字符内容。
+
+如果直连，则依赖的<code>qcss-map.js</code>也要内联到<code>qcss-web.js</code>中。
 
 ## QCSS实现的原理
 
