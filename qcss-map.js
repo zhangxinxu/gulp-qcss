@@ -27,6 +27,7 @@ module.exports = {
         bgr: 'background-repeat: ',
         bgp: 'background-position: ',
         bgs: 'background-size: ',
+        bgo: 'background-origin: ',
         c: 'color: ',
         bd: 'border: ',
         bdl: 'border-left: ',
