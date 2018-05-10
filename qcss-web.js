@@ -84,7 +84,7 @@ module.exports = function (data) {
                             } else if (/^(?:zx|op|z|fw)$/.test(key) == false && parts != '0') {
                                 parts = parts + 'px';
                             }
-                        } else if (key == 'tsl') {
+                        } else if (key == 'trn') {
                             // transition过渡
                             parts = (keyMap[parts] || parts).replace(':', '').trim();
                         } else if (key != 'a') {
