@@ -88,7 +88,7 @@ module.exports = {
         ls: 'letter-spacing: ',
         a: 'animation: ',
         trm: 'transform: ',
-        trs: 'transition: ',
+        trn: 'transition: ',
         bs: 'box-shadow: ',
         ts: 'text-shadow: ',
         con: 'content: ',
