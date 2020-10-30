@@ -92,6 +92,7 @@ module.exports = {
         bs: 'box-shadow: ',
         ts: 'text-shadow: ',
         con: 'content: ',
+        pe: 'pointer-events: ',
         table: 'display: table; table-layout: fixed; width: 100%',
         center: 'position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto',
         ell: 'text-overflow: ellipsis; white-space: nowrap; overflow: hidden',
