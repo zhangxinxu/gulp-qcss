@@ -26,12 +26,17 @@
   },
   "dependencies": {
     "gulp-util": "^2.2.14",
-    "through2": "^0.4.2"
+    "through2": "^0.4.2",
+    "postcss": "latest"
   },
   "devDependencies": {},
   "engines": {
     "node": ">=0.9"
   },
+  "keywords": [
+    "qcss",
+    "postcss-plugin"
+  ],
   "license": "MIT",
   "maintainers": [
     {
