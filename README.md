@@ -107,6 +107,48 @@ var qcss2css = function (data) {
 
 如果直连，则依赖的<code>qcss-map.js</code>也要内联到<code>qcss-web.js</code>中。
 
+### 4. postcss使用
+本质上Qcss是个解析器，因此，无法作为postcss插件使用。使用示意：
+
+```js
+let qcss = require('../qcss-web.js');
+const postcss = require('postcss');
+const fs = require('fs')
+
+let parse = (css, opts = {}) => {
+    return postcss.parse(qcss(css), opts);
+}
+
+fs.readFile(__dirname + '/src/test.qcss', 'utf-8', (err, css) => {
+    postcss([{
+        postcssPlugin: 'postcss-qcss'
+    }]).process(css, {
+        from: __dirname + '/src/test.qcss', 
+        to: __dirname + '/dest/test.css',
+        parser: parse
+    })
+    .then(result => {
+        fs.writeFile(__dirname + '/dest/test.css', result.css, (err) => {
+            if (!err) {
+                console.log('dest/test.css编译成功');
+            }
+        })
+    }).catch(error => {
+        console.error(error)
+    })
+})
+```
+
+详见 ./test-postcss-qcss/run.js
+
+可以执行下面的命令体验：
+
+```js
+npm install
+
+node test-postcss-qcss/run
+```
+
 ## QCSS实现的原理
 
 本质上就是个正则替换。
@@ -147,7 +189,7 @@ css = qcss.replace(/* 替换细节 */);
 
 完整映射规则可参见：<code>/qcss-map.js</code>
 
-内置的规则为自己多年缩写习惯，很多命名都是借鉴zxx.lib.css[https://github.com/zhangxinxu/zxx.lib.css] 由于不是粉色的，不可能所有人都喜欢这样的命名规则，所以，建议可以根据自己的习惯和喜好进行修改，添加。
+内置的规则为自己多年缩写习惯，很多命名都是借鉴zxx.lib.css[https://github.com/zhangxinxu/zxx.lib.css] 由于不是粉色的（指人民币），不可能所有人都喜欢这样的命名规则，所以，建议可以根据自己的习惯和喜好进行修改，添加。
 
 ## QCSS的其他功能
 
