@@ -6,7 +6,8 @@
     "gulpplugin",
     "qcss",
     "css",
-    "efficiency"
+    "efficiency",
+    "postcss-plugin"
   ],
   "scripts": {
     "test": "./test gulp"
@@ -33,10 +34,6 @@
   "engines": {
     "node": ">=0.9"
   },
-  "keywords": [
-    "qcss",
-    "postcss-plugin"
-  ],
   "license": "MIT",
   "maintainers": [
     {

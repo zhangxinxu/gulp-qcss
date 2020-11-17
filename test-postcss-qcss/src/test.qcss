@@ -23,12 +23,15 @@ body.category h3{f1.5em; mt10;}
 img.centered {db;mla;mra;}
 img.alignright {p4;m0 0 2 7;di;	}img.alignleft {p4;m0 7 3 0;di;}
 .alignright {l;}.alignleft {r;}
-p{p8 0; m0;}
+p{p8 0; m0;
+--vv: url(xxx);
+bg var(--vv)}
 .a_link{tdl;trm op .2s;}.a_link:hover{c#f30; tdn;}
 img{bd0;}.vimg{mb-3;}
 code{br3; p0 4; ff font;}
 .m-bg {
     bg url(example.jpg) no calc(100% - 30px * 2 ) b, linear-gradient(to t, #333, #999);
+    dfc;
 }
 .m-clac{m 9 10 calc(4px / 2 + 4px + 9 * 4px) 0;}
 @media all and (max-width:320px) {

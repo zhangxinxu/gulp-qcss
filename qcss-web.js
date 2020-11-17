@@ -48,11 +48,11 @@ module.exports = function (data) {
             if (!state) {
                 return '';
             }
-            // if (state.indexOf(':') != -1) {
-            //     return state;
-            // }
+            if (state.indexOf(':') != -1) {
+                return state;
+            }
             // state指一段声明，例如f 20，此时下面的key是f, value是20
-            return state.replace(/^([a-z]+):\s(.*)$/g, function (matchs, key, value) {
+            return state.replace(/^([a-z]+)(.*)$/g, function (matchs, key, value) {
                 // 值主要是增加单位，和一些关键字转换
                 // 1. 逗号
                 value = (value || '').split(',').map(function (multiple) {

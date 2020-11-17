@@ -6,6 +6,8 @@ module.exports = {
         db: 'display: block',
         dt: 'display: table',
         dtc: 'display: table-cell',
+        df: 'display: flex',
+        dg: 'display:grid',
         m: 'margin: ',
         ml: 'margin-left: ',
         mt: 'margin-top: ',
@@ -96,7 +98,9 @@ module.exports = {
         table: 'display: table; table-layout: fixed; width: 100%',
         center: 'position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto',
         ell: 'text-overflow: ellipsis; white-space: nowrap; overflow: hidden',
-        clip: 'position: absolute; clip: rect(0 0 0 0)'
+        clip: 'position: absolute; clip: rect(0 0 0 0)',
+        dgc: 'display: grid; place-items: center',
+        dfc: 'display: flex; align-items: center; justify-content: center'
     },
     valueMap: {
         a: 'auto',
